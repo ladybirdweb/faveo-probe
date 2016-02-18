@@ -6,7 +6,7 @@ Use ``probe.php`` script to check if your system can run [Faveo](https://www.fav
 
 Instructions:
 
-1. Download latest Faveo Probe` from GitHub, 
+1. Download latest Faveo Probe from GitHub, 
 2. Open ``index.php`` in your browser, 
 3. Script will run the Environment test and show you the results, 
 4. Click continue to run Database test, Script will run the test and show you the results.
