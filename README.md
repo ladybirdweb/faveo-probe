@@ -2,7 +2,7 @@
 
 <br><img src="https://travis-ci.org/ladybirdweb/faveo-probe.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg"></br>
 
-Use ``probe.php`` script to check if your system can run [Faveo](https://www.faveohelpdesk.com) or not. 
+Use Faveo Probe script to check if your system can run [Faveo](https://www.faveohelpdesk.com) or not. 
 
 Instructions:
 
