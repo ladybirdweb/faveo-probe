@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Faveo HELPDESK</title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="css/load-styles.css" type="text/css" media="all">
+		<link rel="shortcut icon" href="images/favicon.ico">
+		<link rel="stylesheet" href="css/css.css" type="text/css" media="all">
+		<link rel="stylesheet" href="css/wc-setup.css" type="text/css" media="all">
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href="css/ggpopover.css" rel="stylesheet" />
+
+
+
+	</head>
+
+<body class="wc-setup wp-core-ui">
+	<h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank">
+            <img src="images/logo.png" alt="faveo"></a></h1>
+    <ol class="wc-setup-steps">
+        
+        <li class="done">Environment Test</li>
+        <li class="active">Database Test</li>
+       
+        <li class="">Ready</li>
+    </ol>
+    <div class="wc-setup-content">
+        <h1 style="text-align: center;">Database Setup</h1>
+
+<!--
+=====================//Note: Future reference of tooltip//---------------------
+
+
+		<div id="sectool">
+			<div class="w-clearfix column-right chat">
+				<div class="arrow-globe"></div>
+				<div class="chat-text" id="backend">Tooltip...</div>
+			</div>
+		</div>
+-->
+
+        <form>
+            <table>
+                <tr>
+                    <td>
+							<label for="selectbox1">Database <span style="color
+								: red;font-size:12px;">*</span></label>
+                    </td>
+			
+					<td>
+						<div class="demo" style="margin-left: 250px;height: 25px;">
+
+							<select name="filesA" id="selectbox3" class="drop"  required>
+								<option value="MySQL" selected="selected" >MySQL</option>
+								<option value="PgSQL" >PgSQL</option>
+								<option value="SQLSRV" >SQLSRV</option>
+							</select>
+
+						</div>
+						
+                    </td>
+                    <td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+                    </td>
+                </tr>
+
+                <tr>
+
+
+                    <td>
+						<label for="box1">Host<span style="color
+							: red;font-size:12px;">*</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="box1" required>
+                    </td>
+					<td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+					</td>
+                </tr>
+                <tr>
+                    <td>
+						<label for="box2">Port</label>
+                    </td>
+                    <td>
+                        <input type="text" id="box2">
+                    </td>
+					<td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+					</td>
+                </tr>
+                <tr>
+                    <td>
+						<label for="box3">Database Name<span style="color
+							: red;font-size:12px;">*</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="box3" required>
+                    </td>
+					<td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+					</td>
+                </tr>
+                <tr>
+                    <td>
+						<label for="box4">User Name<span style="color
+							: red; font-size: 12px;">*</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="box4" required>
+                    </td>
+					<td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+					</td>
+                </tr>
+                <tr>
+                    <td>
+						<label for="box5">Password</label>
+                    </td>
+                    <td>
+                        <input type="text" id="box5">
+                    </td>
+					<td>
+						<button type="button"
+								data-toggle="popover"
+								data-placement="right"
+								data-arrowcolor="#eeeeee"
+								data-bordercolor="#bbbbbb"
+								data-title-backcolor="#cccccc"
+								data-title-bordercolor="#bbbbbb"
+								data-title-textcolor="#444444"
+								data-content-backcolor="#eeeeee"
+								data-content-textcolor="#888888"
+								title="Popover title"
+								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+					</td>
+                </tr>
+				
+				
+				
+<!--
+=====================//Note: Future reference of tooltip//---------------------
+ <tr>
+                    <td>
+						<label for="box5">Password</label>
+                    </td>
+                    <td>
+                        <input type="text" id="box5">
+                    </td>
+                    <td>
+                        <a href="#" class="tooltip"><i class="fa fa-question-circle"></i></a>
+                    </td>
+                </tr>
+-->
+
+            </table>
+
+
+
+
+            <br>
+            <p class="wc-setup-actions step">
+                <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
+                <a href="step2.html" class="button button-large button-next" style="float: left">Previous</a>
+            </p>
+        </form>
+    </div>
+
+	<p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
+    </p>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--
+    <script>
+        $(document).ready(function() {
+            $("button").mouseover(function() {
+                $.ajax({
+                    url: "demo_test.txt",
+                    success: function(result) {
+                        $("#div1").html(result);
+                    }
+                });
+            });
+            $("button").mouseout(function() {
+                $("#div1").hide(20000);
+            });
+        });
+    </script>
+    
+-->
+
+
+    <!--
+    <script>
+        $(document).ready(function() {
+            $("#sectool").hide();
+            $(".tooltip").mouseover(function() {
+
+
+                $.ajax({
+                    url: "demo_test.txt",
+                    type: "POST",
+                    success: function(result) {
+                        $("#backend").html(result);
+                    }
+                });
+                $("#sectool").show();
+            });
+
+            $(".tooltip").mouseout(function() {
+                //                setInterval(function() {
+               $("#sectool").hide();
+                //                }, 10000);
+            });
+        });
+    </script>
+-->
+<!--
+=====================//Note: Future reference of tooltip//---------------------
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.tooltip').mouseover(function(e) {
+				$('#sectool').hide();
+				$('#sectool').css({
+					'top': e.pageY - 20,
+					'left': e.pageX + 15,
+					'position': 'absolute'
+				});
+				$.ajax({
+					url: "demo_test.txt",
+					type: "POST",
+					success: function(result) {
+						$("#backend").html(result);
+					}
+				});
+				$('#sectool').show();
+			});
+			$('.tooltip').mouseout(function() {
+				
+				$("#sectool").hide();
+				
+			});
+
+		});
+	</script>
+-->
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="js/select.js"></script>
+
+	<script src="js/ggpopover.js"></script>
+	<script type="text/javascript">
+		$('[data-toggle="popover"]').ggpopover();
+	</script>
+</body>
+<!--
+    <script>
+        var first = document.getElementById('submitme').disabled = true;
+        var checkme = document.getElementById('Acceptme');
+        var submiter = document.getElementById('submitme');
+
+        checkme.onchange = function() {
+            submiter.disabled = !this.checked;
+            if (submiter.disabled) {
+                alert("Click to enable the button");
+            };
+        };
+    </script>
+-->
+
+
+
+</html>
