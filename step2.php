@@ -43,7 +43,10 @@
 		</div>
 -->
 
-        <form>
+      <p>
+               Below you should enter your database connection details. If you’re not sure about these, contact your host.</p>
+
+        <form action="step2a.php" method="post">
             <table>
                 <tr>
                     <td>
@@ -52,15 +55,21 @@
                     </td>
 			
 					<td>
-						<div class="demo" style="margin-left: 250px;height: 25px;">
+						<div class="side-by-side clearfix moveleftthre">
+							<div>
+								<select id="database-type" name="database-type" data-placeholder="Choose a SQL format..." class="chosen-select" style="width:290px;" tabindex="2">
+									<option value=""></option>
 
-							<select name="filesA" id="selectbox3" class="drop"  required>
-								<option value="MySQL" selected="selected" >MySQL</option>
-								<option value="PgSQL" >PgSQL</option>
-								<option value="SQLSRV" >SQLSRV</option>
-							</select>
 
+									<option value="MySQL">MySQL</option>
+
+									<option value="mm/dd/yyyy">PgSQL</option>
+									<option value="SQLSRV">SQLSRV</option>
+									
+								</select>
+							</div>
 						</div>
+					
 						
                     </td>
                     <td>
@@ -74,8 +83,8 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database type"
+								data-content="Faveo supports 3 databases, choose anyone which your server supports" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
                     </td>
                 </tr>
 
@@ -87,7 +96,7 @@
 							: red;font-size:12px;">*</span></label>
                     </td>
                     <td>
-                        <input type="text" id="box1" required>
+                        <input type="text" id="host-name" name="host-name"  required>
                     </td>
 					<td>
 						<button type="button"
@@ -100,8 +109,9 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database Host"
+								data-content="You should be able to get this info from your web host, if localhost doesn’t work
+" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
 					</td>
                 </tr>
                 <tr>
@@ -109,7 +119,7 @@
 						<label for="box2">Port</label>
                     </td>
                     <td>
-                        <input type="text" id="box2">
+                        <input type="text" id="port-no" name="port-no">
                     </td>
 					<td>
 						<button type="button"
@@ -122,8 +132,8 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database port no"
+								data-content="This is an optional field, by default port no wil be default port no of the database choosen, enter this field only if your database is not running on default port no" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
 					</td>
                 </tr>
                 <tr>
@@ -132,7 +142,7 @@
 							: red;font-size:12px;">*</span></label>
                     </td>
                     <td>
-                        <input type="text" id="box3" required>
+                        <input type="text" id="database-name" name="database-name" required>
                     </td>
 					<td>
 						<button type="button"
@@ -145,8 +155,8 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database name"
+								data-content="The name of the database you want to run Faveo in" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
 					</td>
                 </tr>
                 <tr>
@@ -155,7 +165,7 @@
 							: red; font-size: 12px;">*</span></label>
                     </td>
                     <td>
-                        <input type="text" id="box4" required>
+                        <input type="text" id="user-name" name="user-name" required>
                     </td>
 					<td>
 						<button type="button"
@@ -168,8 +178,8 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database username"
+								data-content="Your Database username" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
 					</td>
                 </tr>
                 <tr>
@@ -177,7 +187,7 @@
 						<label for="box5">Password</label>
                     </td>
                     <td>
-                        <input type="text" id="box5">
+                        <input type="text" id="password" name="password">
                     </td>
 					<td>
 						<button type="button"
@@ -190,8 +200,8 @@
 								data-title-textcolor="#444444"
 								data-content-backcolor="#eeeeee"
 								data-content-textcolor="#888888"
-								title="Popover title"
-								data-content="And here's some amazing content. It's very engaging. Right?" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
+								title="Database Password"
+								data-content="Your Database user password" style="padding: 0px;"><i class="fa fa-question-circle" style="padding: 0px;"></i></button>
 					</td>
                 </tr>
 				
@@ -216,11 +226,13 @@
 
 
 
-
             <br>
             <p class="wc-setup-actions step">
-                <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
-                <a href="step2.html" class="button button-large button-next" style="float: left">Previous</a>
+               
+                <a href="index.php" class="button button-large button-next" style="float: left">Previous</a>
+                <form action="step2a.php" method="post">
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
+                        </form>
             </p>
         </form>
     </div>
@@ -305,12 +317,32 @@
 	</script>
 -->
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script src="js/select.js"></script>
-
 	<script src="js/ggpopover.js"></script>
 	<script type="text/javascript">
 		$('[data-toggle="popover"]').ggpopover();
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<script src="js/chosen.jquery.js" type="text/javascript"></script>
+	<script src="js/prism.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var config = {
+			'.chosen-select': {},
+			'.chosen-select-deselect': {
+				allow_single_deselect: true
+			},
+			'.chosen-select-no-single': {
+				disable_search_threshold: 10
+			},
+			'.chosen-select-no-results': {
+				no_results_text: 'Oops, nothing found!'
+			},
+			'.chosen-select-width': {
+				width: "95%"
+			}
+		}
+		for (var selector in config) {
+			$(selector).chosen(config[selector]);
+		}
 	</script>
 </body>
 <!--
