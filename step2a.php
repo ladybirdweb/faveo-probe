@@ -152,15 +152,16 @@ if($connection->select_db($database_name)) {
 				<p id="fail">Database connection unsuccessful. This system does not meet Faveo system requirements</p>
 				</div>
 <?php } // if ?>
+ <form action="step3.html" method="post">
 				<div style="border-bottom: 1px solid #eee;">
                     <p class="wc-setup-actions step" >
-                    <form action="step3.html" method="post">
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
-                        </form>
+                   
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue" <?php if( $mysql_ok !== null && $mysql_ok) { } else {?>disabled<?php }?>>
+                        
                         <a href="index.php" class="button button-large button-next" style="float: left">Previous</a>
                         
                 </p>
-				</div> 
+				</div> </form>
                 <p class="wc-setup-actions step">
                 <br><span class="ok">Ok</span> — All Ok
                 <br><span class="warning">Warning</span> — Not a deal breaker, but it's recommended to have this installed for some features to work

@@ -257,20 +257,21 @@
 <?php } else { ?>
       <div class="woocommerce-message woocommerce-tracker " >
 				<p id="fail">This system does not meet Faveo system requirements</p>
-				
+				</div>
      <?php } ?>
             
-			</div>
+			
             
-            
+             <form action="step2.php" method="post">
             <div class="border-line">
                 <p class="wc-setup-actions step">
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
-                    <form action="step2.php" method="post">
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
-                        </form>
+                   
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) { } else {?> disabled <?php } ?>
+                        
                 </p>
             </div>
+            </form>
             <br><span class="ok">Ok</span> — All Ok
             <br><span class="warning">Warning</span> — Not a deal breaker, but it's recommended to have this installed for some features to work
             <br><span class="error">Error</span> — Faveo HELPDESK require this feature and can't work without it

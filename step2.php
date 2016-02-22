@@ -224,18 +224,19 @@
 
             </table>
 
-
+</form>
+</div>
 
             <br>
-            <p class="wc-setup-actions step">
-               
+            <form action="step2a.php" method="post">
+             <div class="border-line">
+                <p class="wc-setup-actions step">
                 <a href="index.php" class="button button-large button-next" style="float: left">Previous</a>
-                <form action="step2a.php" method="post">
                         <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
-                        </form>
+                        
             </p>
-        </form>
-    </div>
+        
+    </div></form>
 
 	<p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
     </p>
