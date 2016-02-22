@@ -1,6 +1,6 @@
 # Faveo Probe
 
-<br><img src="https://travis-ci.org/ladybirdweb/faveo-probe.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg"></br>
+<br><img src="https://travis-ci.org/ladybirdweb/faveo-probe.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg">&nbsp;<a href="https://styleci.io/repos/51975719/shield" target="_blank"><img src="https://styleci.io/repos/51975719/shield" alt="StyleCI"></a></br>
 
 Use Faveo Probe script to check if your system can run [Faveo](https://www.faveohelpdesk.com) or not. 
 
