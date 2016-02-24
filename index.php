@@ -76,8 +76,13 @@
    */
   function validate_php(&$results)
   {
+<<<<<<< HEAD
       if (version_compare(PHP_VERSION, '5.5') == -1) {
           $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+=======
+      if (version_compare(PHP_VERSION, '5.3.3') == -1) {
+          $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.3.3. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+>>>>>>> refs/remotes/ladybirdweb/master
 
           return false;
       } else {
@@ -106,6 +111,7 @@
       } // if
   } // validate_memory_limit
 
+<<<<<<< HEAD
     /**
      * Validate Apache modules.
      *
@@ -146,6 +152,27 @@
                 $ok = false;
             } // if
         } // foreach
+=======
+  /**
+   * Validate PHP extensions.
+   *
+   * @param array $results
+   */
+  function validate_extensions(&$results)
+  {
+      $ok = true;
+
+      $required_extensions = ['mysql', 'pcre', 'tokenizer', 'ctype', 'session', 'json', 'xml', 'dom', 'phar'];
+
+      foreach ($required_extensions as $required_extension) {
+          if (extension_loaded($required_extension)) {
+              $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
+          } else {
+              $results[] = new TestResult("Extension '$required_extension' is required in order to run activeCollab", STATUS_ERROR);
+              $ok = false;
+          } // if
+      } // foreach
+>>>>>>> refs/remotes/ladybirdweb/master
     // Check for eAccelerator
     if (extension_loaded('eAccelerator') && ini_get('eaccelerator.enable')) {
         $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes activeCollab to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
@@ -158,6 +185,7 @@
     } // if
 
     $recommended_extensions = [
+<<<<<<< HEAD
       'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
       'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
@@ -174,6 +202,26 @@
 
     return $ok;
     } // validate_extensions
+=======
+      'gd'       => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
+      'mbstring' => 'MultiByte String is used for work with Unicode. Without it, system may not split words and string properly and you can have weird question mark characters in Recent Activities for example. Please refer to <a href="http://www.php.net/manual/en/mbstring.installation.php">this</a> page for installation instructions',
+      'curl'     => 'cURL is used to support various network tasks. Please refer to <a href="http://www.php.net/manual/en/curl.installation.php">this</a> page for installation instructions',
+      'iconv'    => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
+      'imap'     => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
+      'zlib'     => 'ZLIB is used to read and write gzip (.gz) compressed files',
+      // SVN extension ommited, to avoid confusion
+    ];
+      foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
+          if (extension_loaded($recommended_extension)) {
+              $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
+          } else {
+              $results[] = new TestResult("Extension '$recommended_extension' was not found. <span class=\"details\">$recommended_extension_desc</span>", STATUS_WARNING);
+          } // if
+      } // foreach
+
+    return $ok;
+  } // validate_extensions
+>>>>>>> refs/remotes/ladybirdweb/master
 
   /**
    * Validate Zend Engine compatibility mode.
@@ -273,8 +321,12 @@
   $php_ok = validate_php($results);
   $memory_ok = validate_memory_limit($results);
   $extensions_ok = validate_extensions($results);
+<<<<<<< HEAD
   $module_ok = validate_apache_module($results);
   // $compatibility_mode_ok = validate_zend_compatibility_mode($results);
+=======
+  $compatibility_mode_ok = validate_zend_compatibility_mode($results);
+>>>>>>> refs/remotes/ladybirdweb/master
 
   foreach ($results as $result) {
       echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
@@ -283,7 +335,11 @@
             <!-- -->
             </p>
             
+<<<<<<< HEAD
             <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
+=======
+            <?php if ($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) {
+>>>>>>> refs/remotes/ladybirdweb/master
     ?>
       <div class="woocommerce-message woocommerce-tracker" >
 				<p id="pass">OK, this system can run Faveo</p>
@@ -305,7 +361,11 @@
                 <p class="wc-setup-actions step">
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
+<<<<<<< HEAD
                         <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
+=======
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) {
+>>>>>>> refs/remotes/ladybirdweb/master
 } else {
     ?> disabled <?php 
 } ?>
