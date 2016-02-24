@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
-	<head>
-		<meta name="viewport" content="width=device-width">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Faveo HELPDESK</title>
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<link rel="stylesheet" href="css/load-styles.css" type="text/css" media="all">
-		<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="stylesheet" href="css/css.css" type="text/css" media="all">
-		<link rel="stylesheet" href="css/wc-setup.css" type="text/css" media="all">
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Faveo HELPDESK</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/load-styles.css" type="text/css" media="all">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/css.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/wc-setup.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-	</head>
-	
-	
+  </head>
+  
+  
     <body class="wc-setup wp-core-ui">
-		<h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank"><img src="images/logo.png" alt="faveo"></a></h1>
+    <h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank"><img src="images/logo.png" alt="faveo"></a></h1>
         <ol class="wc-setup-steps">
             
             <li class="active">Environment Test</li>
@@ -28,7 +28,7 @@
         </ol>
         <div class="wc-setup-content">
             <h1 style="text-align: center;"> Environment Test
-			</h1>
+      </h1>
             <h2>Probe</h2>
             <p>
                 <strong>Probe Version:</strong> 1.0
@@ -76,8 +76,8 @@
    */
   function validate_php(&$results)
   {
-      if (version_compare(PHP_VERSION, '5.3.3') == -1) {
-          $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.3.3. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+      if (version_compare(PHP_VERSION, '5.5') == -1) {
+          $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
           return false;
       } else {
@@ -106,25 +106,46 @@
       } // if
   } // validate_memory_limit
 
-  /**
-   * Validate PHP extensions.
-   *
-   * @param array $results
-   */
-  function validate_extensions(&$results)
-  {
-      $ok = true;
+    /**
+     * Validate Apache modules.
+     *
+     *@param array $results
+     */
+    function validate_apache_module(&$results)
+    {
+        $modules = apache_get_modules();
+        if (in_array('mod_rewrite', apache_get_modules()) === true) {
+            $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
-      $required_extensions = ['mysql', 'pcre', 'tokenizer', 'ctype', 'session', 'json', 'xml', 'dom', 'phar'];
+            return true;
 
-      foreach ($required_extensions as $required_extension) {
-          if (extension_loaded($required_extension)) {
-              $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
-          } else {
-              $results[] = new TestResult("Extension '$required_extension' is required in order to run activeCollab", STATUS_ERROR);
-              $ok = false;
-          } // if
-      } // foreach
+            return true;
+        } else {
+            $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
+
+            return false;
+        }
+    }
+
+    /**
+     * Validate PHP extensions.
+     *
+     * @param array $results
+     */
+    function validate_extensions(&$results)
+    {
+        $ok = true;
+
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl'];
+
+        foreach ($required_extensions as $required_extension) {
+            if (extension_loaded($required_extension)) {
+                $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
+            } else {
+                $results[] = new TestResult("Extension '$required_extension' is required in order to run Faveo", STATUS_ERROR);
+                $ok = false;
+            } // if
+        } // foreach
     // Check for eAccelerator
     if (extension_loaded('eAccelerator') && ini_get('eaccelerator.enable')) {
         $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes activeCollab to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
@@ -137,24 +158,22 @@
     } // if
 
     $recommended_extensions = [
-      'gd'       => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
-      'mbstring' => 'MultiByte String is used for work with Unicode. Without it, system may not split words and string properly and you can have weird question mark characters in Recent Activities for example. Please refer to <a href="http://www.php.net/manual/en/mbstring.installation.php">this</a> page for installation instructions',
-      'curl'     => 'cURL is used to support various network tasks. Please refer to <a href="http://www.php.net/manual/en/curl.installation.php">this</a> page for installation instructions',
-      'iconv'    => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
-      'imap'     => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
-      'zlib'     => 'ZLIB is used to read and write gzip (.gz) compressed files',
+      'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
+      'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
+      //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
+      // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
     ];
-      foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
-          if (extension_loaded($recommended_extension)) {
-              $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
-          } else {
-              $results[] = new TestResult("Extension '$recommended_extension' was not found. <span class=\"details\">$recommended_extension_desc</span>", STATUS_WARNING);
-          } // if
-      } // foreach
+        foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
+            if (extension_loaded($recommended_extension)) {
+                $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
+            } else {
+                $results[] = new TestResult("Extension '$recommended_extension' was not found. <span class=\"details\">$recommended_extension_desc</span>", STATUS_WARNING);
+            } // if
+        } // foreach
 
     return $ok;
-  } // validate_extensions
+    } // validate_extensions
 
   /**
    * Validate Zend Engine compatibility mode.
@@ -254,7 +273,8 @@
   $php_ok = validate_php($results);
   $memory_ok = validate_memory_limit($results);
   $extensions_ok = validate_extensions($results);
-  $compatibility_mode_ok = validate_zend_compatibility_mode($results);
+  $module_ok = validate_apache_module($results);
+  // $compatibility_mode_ok = validate_zend_compatibility_mode($results);
 
   foreach ($results as $result) {
       echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
@@ -263,29 +283,29 @@
             <!-- -->
             </p>
             
-            <?php if ($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) {
+            <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
     ?>
       <div class="woocommerce-message woocommerce-tracker" >
-				<p id="pass">OK, this system can run Faveo</p>
-				
-			</div>
+        <p id="pass">OK, this system can run Faveo</p>
+        
+      </div>
 <?php 
 } else {
     ?>
       <div class="woocommerce-message woocommerce-tracker " >
-				<p id="fail">This system does not meet Faveo system requirements</p>
-				</div>
+        <p id="fail">This system does not meet Faveo system requirements</p>
+        </div>
      <?php 
 } ?>
             
-			
+      
             
              <form action="step2.php" method="post">
             <div class="border-line">
                 <p class="wc-setup-actions step">
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) {
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
 } else {
     ?> disabled <?php 
 } ?>
@@ -302,9 +322,9 @@
 
 
         </div>
-		<p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
+    <p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
         </p>
 
     </body>
-	
+  
 </html>
