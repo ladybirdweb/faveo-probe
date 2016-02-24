@@ -75,8 +75,8 @@
    * @param array $result
    */
   function validate_php(&$results) {
-    if(version_compare(PHP_VERSION, '5.3.3') == -1) {
-      $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.3.3. Your PHP version: ' . PHP_VERSION, STATUS_ERROR);
+    if(version_compare(PHP_VERSION, '5.5') == -1) {
+      $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.5.*. Your PHP version: ' . PHP_VERSION, STATUS_ERROR);
       return false;
     } else {
       $results[] = new TestResult('Your PHP version is ' . PHP_VERSION, STATUS_OK);
@@ -127,7 +127,7 @@
     {
         $ok = true;
     
-    $required_extensions = array('mysql', 'mysqli', 'pcre', 'tokenizer', 'ctype', 'session', 'json', 'xml', 'dom', 'phar', 'imap', 'mcrypt', 'mbstring', 'openssl');
+    $required_extensions = array('mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl');
     
     foreach($required_extensions as $required_extension) {
       if(extension_loaded($required_extension)) {
@@ -150,11 +150,9 @@
     
     $recommended_extensions = array(
       'gd' => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions', 
-      'mbstring' => 'MultiByte String is used for work with Unicode. Without it, system may not split words and string properly and you can have weird question mark characters in Recent Activities for example. Please refer to <a href="http://www.php.net/manual/en/mbstring.installation.php">this</a> page for installation instructions', 
-      'curl' => 'cURL is used to support various network tasks. Please refer to <a href="http://www.php.net/manual/en/curl.installation.php">this</a> page for installation instructions', 
       'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions', 
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
-      'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files', 
+      // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files', 
       // SVN extension ommited, to avoid confusion
     );
     foreach($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
