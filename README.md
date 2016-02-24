@@ -4,7 +4,7 @@
 
 Use Faveo Probe script to check if your system can run [Faveo](https://www.faveohelpdesk.com) or not. 
 
-Prerequisite:
+**Prerequisite:**
 
 Before you run this test following components have to be installed on your server
 
@@ -13,14 +13,14 @@ Before you run this test following components have to be installed on your serve
 3. Database: MySQL(5.0+) or Postgres or SQLite or SQL Server
 4. Pretty URLs or Search Engine Friendly URL's have to be enabled in your web server configuration
 
-Instructions:
+**Instructions:**
 
 1. Download latest Faveo Probe from GitHub, 
 2. Open ``index.php`` in your browser, 
 3. Script will run the Environment test and show you the results, 
 4. Click continue to run Database test, Script will run the test and show you the results.
 
-Each test can have one of the three outputs:
+**Each test can have one of the three outputs:**
 
 1. <span style="color: green">**Ok** (green)</span> - requirement is met.
 2. <span style="color: orange">**Warning** (orange)</span> - test did not pass, but Faveo does not require that environment option to run. Warnings are usually thrown in case of missing extensions that are optional, but good to have, or in cases in early warning about deprecated functionality.
