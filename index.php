@@ -99,22 +99,41 @@
       return false;
     } // if
   } // validate_memory_limit
-  
+
+  /**
+   * Validate Apache modules
+   *
+   *@param array $results
+   */
+    function validate_apache_module(&$results)
+    {
+        $modules = apache_get_modules();
+        if (in_array('mod_rewrite', apache_get_modules()) === true) {
+             $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
+      return true;
+             return true;
+        } else {
+             $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
+             return false;
+        }
+    }
+
   /**
    * Validate PHP extensions
    *
    * @param array $results
    */
-  function validate_extensions(&$results) {
-    $ok = true;
+    function validate_extensions(&$results)
+    {
+        $ok = true;
     
-    $required_extensions = array('mysql', 'pcre', 'tokenizer', 'ctype', 'session', 'json', 'xml', 'dom', 'phar');
+    $required_extensions = array('mysql', 'mysqli', 'pcre', 'tokenizer', 'ctype', 'session', 'json', 'xml', 'dom', 'phar', 'imap', 'mcrypt', 'mbstring', 'openssl');
     
     foreach($required_extensions as $required_extension) {
       if(extension_loaded($required_extension)) {
         $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
       } else {
-        $results[] = new TestResult("Extension '$required_extension' is required in order to run activeCollab", STATUS_ERROR);
+        $results[] = new TestResult("Extension '$required_extension' is required in order to run Faveo", STATUS_ERROR);
         $ok = false;
       } // if
     } // foreach
@@ -134,7 +153,7 @@
       'mbstring' => 'MultiByte String is used for work with Unicode. Without it, system may not split words and string properly and you can have weird question mark characters in Recent Activities for example. Please refer to <a href="http://www.php.net/manual/en/mbstring.installation.php">this</a> page for installation instructions', 
       'curl' => 'cURL is used to support various network tasks. Please refer to <a href="http://www.php.net/manual/en/curl.installation.php">this</a> page for installation instructions', 
       'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions', 
-      'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions', 
+      //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files', 
       // SVN extension ommited, to avoid confusion
     );
@@ -240,7 +259,8 @@
   $php_ok = validate_php($results);
   $memory_ok = validate_memory_limit($results);
   $extensions_ok = validate_extensions($results);
-  $compatibility_mode_ok = validate_zend_compatibility_mode($results);
+  $module_ok = validate_apache_module($results);
+  // $compatibility_mode_ok = validate_zend_compatibility_mode($results);
   
   foreach($results as $result) {
     print '<br/><span class="' . $result->status . '">' . $result->status . '</span> &mdash; ' . $result->message . '';
@@ -249,7 +269,7 @@
             <!-- -->
             </p>
             
-            <?php if($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) { ?>
+            <?php if($php_ok && $memory_ok && $extensions_ok && $module_ok) { ?>
       <div class="woocommerce-message woocommerce-tracker" >
 				<p id="pass">OK, this system can run Faveo</p>
 				
@@ -267,7 +287,7 @@
                 <p class="wc-setup-actions step">
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if($php_ok && $memory_ok && $extensions_ok && $compatibility_mode_ok && $mysql_ok) { } else {?> disabled <?php } ?>
+                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if($php_ok && $memory_ok && $extensions_ok && $module_ok) { } else {?> disabled <?php } ?>
                         
                 </p>
             </div>
