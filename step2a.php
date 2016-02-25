@@ -1,3 +1,18 @@
+<?php
+// error_reporting(0);
+$var = isset($_POST['submit']) && isset($_POST['host-name'])
+&& isset($_POST['database-name']) && isset($_POST['user-name'])
+&& isset($_POST['database-type']);
+
+if ($var) {
+    if (empty($_POST['host-name']) ||
+    empty($_POST['user-name']) ||
+    empty($_POST['database-type']) ||
+    empty($_POST['database-name'])) {
+        header('Location: step2.php?return=1&error_message=Please fill all the required fields.');
+    } else {
+
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -19,12 +34,12 @@
 	
     <body class="wc-setup wp-core-ui">
     
-    <?php 
+    <?php
     define('PROBE_VERSION', '4.2');
-  define('PROBE_FOR', 'activeCollab 4.2 and Newer');
-  define('STATUS_OK', 'ok');
-  define('STATUS_WARNING', 'warning');
-  define('STATUS_ERROR', 'error');
+    define('PROBE_FOR', 'activeCollab 4.2 and Newer');
+    define('STATUS_OK', 'ok');
+    define('STATUS_WARNING', 'warning');
+    define('STATUS_ERROR', 'error');
 
     $database_type = $_POST['database-type'];
     $database_name = $_POST['database-name'];
@@ -40,29 +55,29 @@
 //	echo $database_username."<br/>";
 //	echo $database_password."<br/>";
 
- class TestResult
- {
-     public $message;
-     public $status;
+    class TestResult
+    {
+        public $message;
+        public $status;
 
-     public function TestResult($message, $status = STATUS_OK)
-     {
-         $this->message = $message;
-         $this->status = $status;
-     }
- } // TestResult
-   function check_have_inno($link)
-   {
+        public function testResult($message, $status = STATUS_OK)
+        {
+            $this->message = $message;
+            $this->status = $status;
+        }
+    } // TestResult
+    function check_have_inno($link)
+    {
        // if($result = mysqli_query('SHOW ENGINES', $link)) {
-         if ($result = $link('SHOW ENGINES')) {
-             while ($engine = mysqli_fetch_assoc($result)) {
-                 if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
+        if ($result = $link('SHOW ENGINES')) {
+            while ($engine = mysqli_fetch_assoc($result)) {
+                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
                      return true;
-                 } // if
-             } // while
-         } // if
-    return true;
-   } // check_have_inno
+                } // if
+            } // while
+        } // if
+        return true;
+    } // check_have_inno
 
     ?>
 		<h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank"><img src="images/logo.png" alt="faveo"></a></h1>
@@ -94,20 +109,28 @@
   //if($connection = mysql_connect($database_host, $database_username, $database_password)) {
 //    $results[] = new TestResult('Connected to database as ' . $database_username . '@' . $database_host, STATUS_OK);
 
-    if ($connection = $connection = mysqli_connect($database_host, $database_username, $database_password, $database_name)) {
+if ($connection = mysqli_connect($database_host, $database_username, $database_password)) {
         $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
 
     //if(mysql_select_db($database_name, $connection)) {
 //      $results[] = new TestResult('Database "' . $database_username . '" selected', STATUS_OK);
-//
-if ($connection->select_db($database_name)) {
+    $sql = "SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = '$database_name'";
+    $res = mysqli_query($connection, $sql);
+    $value = mysqli_fetch_assoc($res);
+    foreach ($value as $val) {
+        if ($val==0){
+            $mysqli_version = $connection->server_version;
+            $results[] = new TestResult("Database '$database_name' looks fine.", STATUS_OK);
+            $mysql_ok = true;
+            if ($connection->select_db($database_name)) {
     //      $results[] = new TestResult('Database "' . $database_username . '" selected', STATUS_OK);
       //$mysql_version = mysql_get_server_info($connection);
-      $mysqli_version = $connection->server_version;
-    $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
+        $mysqli_version = $connection->server_version;
+        $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
 
-    if (version_compare($mysqli_version, '5.0') >= 0) {
-        $results[] = new TestResult('MySQL version is '.$mysqli_version, STATUS_OK);
+        if (version_compare($mysqli_version, '5.0') >= 0) {
+            $results[] = new TestResult('MySQL version is '.$mysqli_version, STATUS_OK);
+            $mysql_ok = true;
 
         //$have_inno = check_have_inno($connection);
 
@@ -117,44 +140,54 @@ if ($connection->select_db($database_name)) {
 //          $results[] = new TestResult('No InnoDB support. Although activeCollab can use MyISAM storage engine InnoDB is HIGHLY recommended!', STATUS_WARNING);
 //        }
 //      } else {
-        $results[] = new TestResult('Your MySQL version is '.$mysqli_version.'. We recommend upgrading to at least MySQL5!', STATUS_ERROR);
-        $mysql_ok = false;
-    } // if
-} else {
-    $results[] = new TestResult('Failed to select database. MySQL said: '.mysqli_error(), STATUS_ERROR);
-    $mysql_ok = false;
-} // if
+        } else {
+            $results[] = new TestResult('Your MySQL version is '.$mysqli_version.'. We recommend upgrading to at least MySQL5!', STATUS_ERROR);
+            $mysql_ok = false;
+        }
+         // if
     } else {
-        $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_error(), STATUS_ERROR);
+        $results[] = new TestResult('Failed to select database. MySQL said: '.mysqli_error($connection), STATUS_ERROR);
         $mysql_ok = false;
     } // if
+
+        } else {
+            $results[] = new TestResult('Faveo installation needs an empty database.', STATUS_ERROR);
+            $mysql_ok = false;
+        }
+        # code...
+    }
+    
+} else {
+        $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_error($connection), STATUS_ERROR);
+        $mysql_ok = false;
+} // if
 
   // ---------------------------------------------------
   //  Validators
   // ---------------------------------------------------
 
-  foreach ($results as $result) {
+foreach ($results as $result) {
       echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
-  } // foreach
+} // foreach
 ?><br/>
       
-<?php $mysql_ok = null; ?>
+
 <?php  // if ?>
 
 
-<?php if ($mysql_ok !== null && $mysql_ok) {
+<?php if ($mysql_ok) {
     ?>
 			<div class="woocommerce-message woocommerce-tracker" >
 				<p id="pass">Database connection successful. This system can run Faveo</p>
 				
 			</div>
-<?php 
+<?php
 } else {
     ?>
  <div class="woocommerce-message woocommerce-tracker " >
 				<p id="fail">Database connection unsuccessful. This system does not meet Faveo system requirements</p>
 				</div>
-<?php 
+<?php
 } // if ?>
  <form action="step3.html" method="post">
 				<div style="border-bottom: 1px solid #eee;">
@@ -162,10 +195,10 @@ if ($connection->select_db($database_name)) {
                    
                         <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue" <?php if ($mysql_ok !== null && $mysql_ok) {
 } else {
-    ?>disabled<?php 
+    ?>disabled<?php
 }?>>
                         
-                        <a href="index.php" class="button button-large button-next" style="float: left">Previous</a>
+                        <a href="step2.php?return=1" class="button button-large button-next" style="float: left">Previous</a>
                         
                 </p>
 				</div> </form>
@@ -186,3 +219,9 @@ if ($connection->select_db($database_name)) {
     </body>
 
 </html>
+<?php
+    }
+} else {
+    header('Location: step2.php?return=1&error_message=Please fill all the required fields.');
+}
+?>
