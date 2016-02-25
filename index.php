@@ -305,7 +305,7 @@
                 <p class="wc-setup-actions step">
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
+                        <input type="submit" id="submitme" name="submit" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
 } else {
     ?> disabled <?php 
 } ?>

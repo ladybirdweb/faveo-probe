@@ -1,3 +1,12 @@
+<?php
+$var = isset($_POST['submit']);
+$redirect = isset($_GET['return']);
+if (!($var || $redirect)) {
+    header('Location: index.php');
+    die();
+} else {
+    ?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -45,6 +54,18 @@
 
       <p>
                Below you should enter your database connection details. If you’re not sure about these, contact your host.</p>
+               
+                <?php if (isset($_GET['error_message'])) {
+    ?>
+                <div class="woocommerce-message woocommerce-tracker " >
+               
+                <p id="fail"><?= $_GET['error_message']?></p>
+              </div>
+                <?php
+
+}
+    ?>
+              
 
         <form action="step2a.php" method="post">
             <table>
@@ -57,14 +78,14 @@
 					<td>
 						<div class="side-by-side clearfix moveleftthre">
 							<div>
-								<select id="database-type" name="database-type" data-placeholder="Choose a SQL format..." class="chosen-select" style="width:290px;" tabindex="2">
-									<option value=""></option>
+								<select id="database-type" name="database-type" data-placeholder="Choose a SQL format..." class="chosen-select" style="width:290px;" tabindex="2" required>
+									<option name="database-type" value=""></option>
 
 
-									<option value="MySQL">MySQL</option>
+									<option name="database-type"  value="MySQL">MySQL</option>
 
-									<option value="mm/dd/yyyy">PgSQL</option>
-									<option value="SQLSRV">SQLSRV</option>
+									<!-- <option value="mm/dd/yyyy">PgSQL</option> -->
+									<!-- <option value="SQLSRV">SQLSRV</option> -->
 									
 								</select>
 							</div>
@@ -224,15 +245,15 @@
 
             </table>
 
-</form>
+
 </div>
 
             <br>
-            <form action="step2a.php" method="post">
+           
              <div class="border-line">
                 <p class="wc-setup-actions step">
                 <a href="index.php" class="button button-large button-next" style="float: left">Previous</a>
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
+                        <input type="submit" name="submit" id="submitme" class="button-primary button button-large button-next" value="Continue">
                         
             </p>
         
@@ -364,3 +385,7 @@
 
 
 </html>
+<?php
+
+}
+?>
