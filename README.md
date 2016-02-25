@@ -10,7 +10,7 @@ Before you run this test following components have to be installed on your serve
 
 1. Web Server: Apache or IIS or Nginx
 2. PHP Version: 5.5+
-3. Database: MySQL(5.0+) or Postgres or SQLite or SQL Server
+3. Database: MySQL(5.0+)
 4. Web Server Extension: Pretty URLs or Search Engine Friendly URL's have to be enabled in your web server configuration
 
 **Instructions:**
