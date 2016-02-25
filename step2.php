@@ -5,7 +5,7 @@ if (!($var || $redirect)) {
     header('Location: index.php');
     die();
 } else {
-?>
+    ?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
@@ -56,14 +56,15 @@ if (!($var || $redirect)) {
                Below you should enter your database connection details. If you’re not sure about these, contact your host.</p>
                
                 <?php if (isset($_GET['error_message'])) {
-                ?>
+    ?>
                 <div class="woocommerce-message woocommerce-tracker " >
                
                 <p id="fail"><?= $_GET['error_message']?></p>
               </div>
                 <?php
+
 }
-                ?>
+    ?>
               
 
         <form action="step2a.php" method="post">
@@ -385,5 +386,6 @@ if (!($var || $redirect)) {
 
 </html>
 <?php
+
 }
 ?>
