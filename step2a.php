@@ -188,11 +188,11 @@ foreach ($results as $result) {
 <?php
 
 } // if ?>
- <form action="step3.html" method="post">
+ <form action="step3.php" method="post">
 				<div style="border-bottom: 1px solid #eee;">
                     <p class="wc-setup-actions step" >
                    
-                        <input type="submit" id="submitme" class="button-primary button button-large button-next" value="Continue" <?php if ($mysql_ok !== null && $mysql_ok) {
+                        <input type="submit" name="submit" id="submitme" class="button-primary button button-large button-next" value="Continue" <?php if ($mysql_ok !== null && $mysql_ok) {
 } else {
     ?>disabled<?php
 
