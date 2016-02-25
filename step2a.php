@@ -155,7 +155,7 @@ if ($connection = mysqli_connect($database_host, $database_username, $database_p
         // code...
     }
 } else {
-    $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_error($connection), STATUS_ERROR);
+    $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_connect_error($connection), STATUS_ERROR);
     $mysql_ok = false;
 } // if
 
