@@ -1,3 +1,11 @@
+<?php
+$var = isset($_POST['submit']);
+if (!$var) {
+    header('Location: index.php');
+    die();
+} else {
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -63,8 +71,8 @@
 
 									<option value="MySQL">MySQL</option>
 
-									<option value="mm/dd/yyyy">PgSQL</option>
-									<option value="SQLSRV">SQLSRV</option>
+									<!-- <option value="mm/dd/yyyy">PgSQL</option> -->
+									<!-- <option value="SQLSRV">SQLSRV</option> -->
 									
 								</select>
 							</div>
@@ -364,3 +372,6 @@
 
 
 </html>
+<?php
+}
+?>
