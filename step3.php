@@ -5,7 +5,7 @@ if (!$var) {
     header('Location: index.php');
     die();
 } else {
-?>
+    ?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
@@ -80,5 +80,6 @@ if (!$var) {
 
 </html>
 <?php
+
 }
 ?>
