@@ -169,7 +169,7 @@ foreach ($results as $result) {
 ?><br/>
       
 
-<?php  // if ?>
+<?php  // if?>
 
 
 <?php if ($mysql_ok) {
@@ -187,7 +187,7 @@ foreach ($results as $result) {
 				</div>
 <?php
 
-} // if ?>
+} // if?>
  <form action="step3.php" method="post">
 				<div style="border-bottom: 1px solid #eee;">
                     <p class="wc-setup-actions step" >
