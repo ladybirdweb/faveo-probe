@@ -70,7 +70,7 @@ if ($var) {
         // if($result = mysqli_query('SHOW ENGINES', $link)) {
         if ($result = $link('SHOW ENGINES')) {
             while ($engine = mysqli_fetch_assoc($result)) {
-                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), array('yes', 'default'))) {
+                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
                     return true;
                 } // if
             } // while
@@ -169,7 +169,7 @@ foreach ($results as $result) {
 ?><br/>
       
 
-<?php  // if ?>
+<?php  // if?>
 
 
 <?php if ($mysql_ok) {
@@ -187,7 +187,7 @@ foreach ($results as $result) {
 				</div>
 <?php
 
-} // if ?>
+} // if?>
  <form action="step3.php" method="post">
 				<div style="border-bottom: 1px solid #eee;">
                     <p class="wc-setup-actions step" >

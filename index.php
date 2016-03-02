@@ -121,7 +121,6 @@
             $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
             return true;
-
         } else {
             $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
 
@@ -138,7 +137,7 @@
     {
         $ok = true;
 
-        $required_extensions = array('mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl');
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl'];
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
@@ -159,13 +158,13 @@
         $ok = false;
     } // if
 
-    $recommended_extensions = array(
+    $recommended_extensions = [
       'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
       'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
-    );
+    ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {
                 $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
@@ -231,12 +230,12 @@
    */
   function format_file_size($value)
   {
-      $data = array(
+      $data = [
       'TB' => 1099511627776,
       'GB' => 1073741824,
       'MB' => 1048576,
       'kb' => 1024,
-    );
+    ];
     // commented because of integer overflow on 32bit sistems
     // http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow
     // $value = (integer) $value;
@@ -259,7 +258,7 @@
   {
       if ($result = mysql_query('SHOW ENGINES', $link)) {
           while ($engine = mysql_fetch_assoc($result)) {
-              if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), array('yes', 'default'))) {
+              if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
                   return true;
               } // if
           } // while
@@ -270,7 +269,7 @@
   // ---------------------------------------------------
   //  Do the magic
   // ---------------------------------------------------
-  $results = array();
+  $results = [];
 
   $php_ok = validate_php($results);
   $memory_ok = validate_memory_limit($results);
