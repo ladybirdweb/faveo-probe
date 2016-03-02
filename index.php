@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+<?php 
+error_reporting(0);
+?>
+=======
 <?php
   error_reporting(0);
   ?>
+>>>>>>> refs/remotes/ladybirdweb/master
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -116,16 +122,31 @@
      */
     function validate_apache_module(&$results)
     {
+
+        $sapi_type = php_sapi_name();
+        if (substr($sapi_type, 0, 3) == 'cgi') {
+            $results[] = new TestResult("It looks Like that PHP on your server does not use Apache handler to run. We are unable to check 'mod_rewrite' on your server.", STATUS_ERROR);
+
+            return false;
+
         $modules = apache_get_modules();
         if (in_array('mod_rewrite', $modules) === true) {
             $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
             return true;
 
-        } else {
-            $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
 
-            return false;
+        } else {
+            $modules = apache_get_modules();
+            if (in_array('mod_rewrite', $modules) === true) {
+                $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
+
+                return true;
+            } else {
+                $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
+
+                return false;
+            }
         }
     }
 
