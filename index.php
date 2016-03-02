@@ -50,7 +50,7 @@
   // -- No need to change anything below this line --------------------------------------
 
   define('PROBE_VERSION', '4.2');
-  define('PROBE_FOR', 'activeCollab 4.2 and Newer');
+  define('PROBE_FOR', 'Faveo 4.2 and Newer');
   define('STATUS_OK', 'ok');
   define('STATUS_WARNING', 'warning');
   define('STATUS_ERROR', 'error');
@@ -72,12 +72,12 @@
   /**
    * Validate PHP platform.
    *
-   * @param array $result
+   * @param array $results
    */
   function validate_php(&$results)
   {
       if (version_compare(PHP_VERSION, '5.5') == -1) {
-          $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+          $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
           return false;
       } else {
@@ -89,7 +89,7 @@
   /**
    * Validate memory limit.
    *
-   * @param array $result
+   * @param array $results
    */
   function validate_memory_limit(&$results)
   {
@@ -114,7 +114,7 @@
     function validate_apache_module(&$results)
     {
         $modules = apache_get_modules();
-        if (in_array('mod_rewrite', apache_get_modules()) === true) {
+        if (in_array('mod_rewrite', $modules) === true) {
             $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
             return true;
@@ -148,12 +148,12 @@
         } // foreach
     // Check for eAccelerator
     if (extension_loaded('eAccelerator') && ini_get('eaccelerator.enable')) {
-        $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes activeCollab to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
+        $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes Faveo to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where Faveo is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
         $ok = false;
     } // if
     // Check for XCache
     if (extension_loaded('XCache') && ini_get('xcache.cacher')) {
-        $results[] = new TestResult('XCache opcode cache enabled. <span class="details">XCache opcode cache causes activeCollab to crash. <a href="http://xcache.lighttpd.net/wiki/XcacheIni">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
+        $results[] = new TestResult('XCache opcode cache enabled. <span class="details">XCache opcode cache causes Faveo to crash. <a href="http://xcache.lighttpd.net/wiki/XcacheIni">Disable it</a> for folder where Faveo is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
         $ok = false;
     } // if
 
