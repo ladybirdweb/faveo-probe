@@ -1,5 +1,5 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 $var = isset($_POST['submit']) && isset($_POST['host-name'])
 && isset($_POST['database-name']) && isset($_POST['user-name'])
 && isset($_POST['database-type']);
