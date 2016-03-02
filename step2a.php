@@ -70,7 +70,7 @@ if ($var) {
         // if($result = mysqli_query('SHOW ENGINES', $link)) {
         if ($result = $link('SHOW ENGINES')) {
             while ($engine = mysqli_fetch_assoc($result)) {
-                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
+                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), array('yes', 'default'))) {
                     return true;
                 } // if
             } // while

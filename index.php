@@ -1,3 +1,6 @@
+<?php
+  error_reporting(0);
+  ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -50,7 +53,7 @@
   // -- No need to change anything below this line --------------------------------------
 
   define('PROBE_VERSION', '4.2');
-  define('PROBE_FOR', 'activeCollab 4.2 and Newer');
+  define('PROBE_FOR', 'Faveo 4.2 and Newer');
   define('STATUS_OK', 'ok');
   define('STATUS_WARNING', 'warning');
   define('STATUS_ERROR', 'error');
@@ -72,12 +75,12 @@
   /**
    * Validate PHP platform.
    *
-   * @param array $result
+   * @param array $results
    */
   function validate_php(&$results)
   {
       if (version_compare(PHP_VERSION, '5.5') == -1) {
-          $results[] = new TestResult('Minimum PHP version required in order to run activeCollab is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+          $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
           return false;
       } else {
@@ -89,7 +92,7 @@
   /**
    * Validate memory limit.
    *
-   * @param array $result
+   * @param array $results
    */
   function validate_memory_limit(&$results)
   {
@@ -114,12 +117,11 @@
     function validate_apache_module(&$results)
     {
         $modules = apache_get_modules();
-        if (in_array('mod_rewrite', apache_get_modules()) === true) {
+        if (in_array('mod_rewrite', $modules) === true) {
             $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
             return true;
 
-            return true;
         } else {
             $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
 
@@ -136,7 +138,7 @@
     {
         $ok = true;
 
-        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl'];
+        $required_extensions = array('mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl');
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
@@ -148,22 +150,22 @@
         } // foreach
     // Check for eAccelerator
     if (extension_loaded('eAccelerator') && ini_get('eaccelerator.enable')) {
-        $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes activeCollab to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
+        $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes Faveo to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where Faveo is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
         $ok = false;
     } // if
     // Check for XCache
     if (extension_loaded('XCache') && ini_get('xcache.cacher')) {
-        $results[] = new TestResult('XCache opcode cache enabled. <span class="details">XCache opcode cache causes activeCollab to crash. <a href="http://xcache.lighttpd.net/wiki/XcacheIni">Disable it</a> for folder where activeCollab is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
+        $results[] = new TestResult('XCache opcode cache enabled. <span class="details">XCache opcode cache causes Faveo to crash. <a href="http://xcache.lighttpd.net/wiki/XcacheIni">Disable it</a> for folder where Faveo is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
         $ok = false;
     } // if
 
-    $recommended_extensions = [
+    $recommended_extensions = array(
       'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
       'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
-    ];
+    );
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {
                 $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
@@ -229,12 +231,12 @@
    */
   function format_file_size($value)
   {
-      $data = [
+      $data = array(
       'TB' => 1099511627776,
       'GB' => 1073741824,
       'MB' => 1048576,
       'kb' => 1024,
-    ];
+    );
     // commented because of integer overflow on 32bit sistems
     // http://php.net/manual/en/language.types.integer.php#language.types.integer.overflow
     // $value = (integer) $value;
@@ -257,7 +259,7 @@
   {
       if ($result = mysql_query('SHOW ENGINES', $link)) {
           while ($engine = mysql_fetch_assoc($result)) {
-              if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
+              if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), array('yes', 'default'))) {
                   return true;
               } // if
           } // while
@@ -268,7 +270,7 @@
   // ---------------------------------------------------
   //  Do the magic
   // ---------------------------------------------------
-  $results = [];
+  $results = array();
 
   $php_ok = validate_php($results);
   $memory_ok = validate_memory_limit($results);
