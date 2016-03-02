@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-<?php 
-error_reporting(0);
-?>
-=======
 <?php
   error_reporting(0);
   ?>
->>>>>>> refs/remotes/ladybirdweb/master
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
