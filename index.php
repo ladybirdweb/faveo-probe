@@ -1,7 +1,6 @@
 <?php
 if (version_compare(PHP_VERSION, '5.4') == -1) {
-
-?>
+    ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -55,9 +54,9 @@ if (version_compare(PHP_VERSION, '5.4') == -1) {
 </html>
 
 <?php
-   
+
 } else {
-// Start the session
+    // Start the session
     session_start();
     $_SESSION['check'] = 1;
     header('location: step1.php');

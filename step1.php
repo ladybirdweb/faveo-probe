@@ -2,9 +2,8 @@
 session_start();
 //$check = $_SESSION['check'];
 error_reporting(0);
-if (isset($_SESSION['check']) == 1)
-{
-?>
+if (isset($_SESSION['check']) == 1) {
+    ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
 
@@ -57,21 +56,21 @@ if (isset($_SESSION['check']) == 1)
   // -- No need to change anything below this line --------------------------------------
 
   define('PROBE_VERSION', '4.2');
-  define('PROBE_FOR', 'Faveo 4.2 and Newer');
-  define('STATUS_OK', 'ok');
-  define('STATUS_WARNING', 'warning');
-  define('STATUS_ERROR', 'error');
-  class TestResult
-  {
-      public $message;
-      public $status;
+    define('PROBE_FOR', 'Faveo 4.2 and Newer');
+    define('STATUS_OK', 'ok');
+    define('STATUS_WARNING', 'warning');
+    define('STATUS_ERROR', 'error');
+    class TestResult
+    {
+        public $message;
+        public $status;
 
-      public function TestResult($message, $status = STATUS_OK)
-      {
-          $this->message = $message;
-          $this->status = $status;
-      }
-  } // TestResult
+        public function TestResult($message, $status = STATUS_OK)
+        {
+            $this->message = $message;
+            $this->status = $status;
+        }
+    } // TestResult
   // ---------------------------------------------------
   //  Validators
   // ---------------------------------------------------
@@ -282,10 +281,10 @@ if (isset($_SESSION['check']) == 1)
   // ---------------------------------------------------
   $results = [];
 
-  $php_ok = validate_php($results);
-  $memory_ok = validate_memory_limit($results);
-  $extensions_ok = validate_extensions($results);
-  $module_ok = validate_apache_module($results);
+    $php_ok = validate_php($results);
+    $memory_ok = validate_memory_limit($results);
+    $extensions_ok = validate_extensions($results);
+    $module_ok = validate_apache_module($results);
   // $compatibility_mode_ok = validate_zend_compatibility_mode($results);
 
   foreach ($results as $result) {
@@ -308,7 +307,8 @@ if (isset($_SESSION['check']) == 1)
         <p id="fail">This system does not meet Faveo system requirements</p>
         </div>
      <?php 
-} ?>
+}
+    ?>
             
       
             
@@ -320,7 +320,8 @@ if (isset($_SESSION['check']) == 1)
                         <input type="submit" id="submitme" name="submit" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
 } else {
     ?> disabled <?php 
-} ?>
+}
+    ?>
                         
                 </p>
             </div>
