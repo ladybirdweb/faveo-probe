@@ -36,7 +36,7 @@ if (version_compare(PHP_VERSION, '5.4') == -1) {
             <p>
                 <strong>Probe Version:</strong> 1.0
                 <br><strong>Testing For:</strong> Faveo HELPDESK 1.0.6 and Newer</p>
-                <div><p>Minimum PHP version required in order to run Faveo is PHP 5.5.*. Your PHP version: <?php echo PHP_VERSION ?></p></div>
+                 <div class="woocommerce-message woocommerce-tracker "><p><span id="fail">Error!</span> Minimum PHP version required in order to run Faveo is PHP 5.5.*. Your PHP version: <?php echo PHP_VERSION ?>. Please update your PHP Version.</p></div>
                  <br><span class="ok">Ok</span> — All Ok
             <br><span class="warning">Warning</span> — Not a deal breaker, but it's recommended to have this installed for some features to work
             <br><span class="error">Error</span> — Faveo HELPDESK require this feature and can't work without it
