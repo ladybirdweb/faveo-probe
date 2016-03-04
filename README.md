@@ -1,6 +1,6 @@
 # Faveo Probe
 
-<br><img src="https://travis-ci.org/ladybirdweb/faveo-probe.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg">&nbsp;<a href="https://styleci.io/repos/51975719/shield" target="_blank"><img src="https://styleci.io/repos/51975719/shield" alt="StyleCI"></a></br>
+<br><img src="https://travis-ci.org/ladybirdweb/faveo-probe.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg">&nbsp;<a href="https://styleci.io/repos/51975719/shield" target="_blank"><img src="https://styleci.io/repos/51975719/shield" alt="StyleCI"></a>&nbsp;<a><img src="https://scrutinizer-ci.com/g/ladybirdweb/faveo-probe/badges/quality-score.png?b=master"></a></br>
 
 Use Faveo Probe script to check if your system can run [Faveo](https://www.faveohelpdesk.com) or not. 
 
@@ -10,7 +10,7 @@ Before you run this test following components have to be installed on your serve
 
 1. Web Server: Apache or IIS or Nginx
 2. PHP Version: 5.5+
-3. Database: MySQL(5.0+) or Postgres or SQLite or SQL Server
+3. Database: MySQL(5.0+)
 4. Web Server Extension: Pretty URLs or Search Engine Friendly URL's have to be enabled in your web server configuration
 
 **Instructions:**
