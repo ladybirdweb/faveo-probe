@@ -121,9 +121,8 @@ if (isset($_SESSION['check']) == 1) {
     {
         $sapi_type = php_sapi_name();
         if (substr($sapi_type, 0, 3) == 'cgi') {
-            $results[] = new TestResult("It looks Like that PHP on your server does not use Apache handler to run. We are unable to check 'mod_rewrite' on your server.", STATUS_ERROR);
 
-            return false;
+            return true;
         } else {
             $modules = apache_get_modules();
             if (in_array('mod_rewrite', $modules) === true) {
