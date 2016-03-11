@@ -121,7 +121,6 @@ if (isset($_SESSION['check']) == 1) {
     {
         $sapi_type = php_sapi_name();
         if (substr($sapi_type, 0, 3) == 'cgi') {
-            $results[] = new TestResult("We are unable to detect your web server. Please make sure search engine friendly URL’s or pretty URLS’s are enabled on your web server. "/*Check the article here on how to enable it.*/, STATUS_WARNING);
 
             return true;
         } else {
