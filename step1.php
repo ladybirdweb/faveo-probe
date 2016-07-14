@@ -174,7 +174,7 @@ if (isset($_SESSION['check']) == 1) {
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
-      'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.'
+      'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.',
     ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {
@@ -220,7 +220,7 @@ if (isset($_SESSION['check']) == 1) {
   function php_config_value_to_bytes($val)
   {
       $val = trim($val);
-      $last = strtolower($val{strlen($val) - 1});
+      $last = strtolower($val[strlen($val) - 1]);
       switch ($last) {
       // The 'G' modifier is available since PHP 5.1.0
       case 'g':
@@ -296,19 +296,19 @@ if (isset($_SESSION['check']) == 1) {
             </p>
             
             <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
-    ?>
+      ?>
       <div class="woocommerce-message woocommerce-tracker" >
         <p id="pass">OK, this system can run Faveo</p>
         
       </div>
 <?php 
-} else {
-    ?>
+  } else {
+      ?>
       <div class="woocommerce-message woocommerce-tracker " >
         <p id="fail">This system does not meet Faveo system requirements</p>
         </div>
      <?php 
-}
+  }
     ?>
             
       
@@ -319,9 +319,9 @@ if (isset($_SESSION['check']) == 1) {
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
                         <input type="submit" id="submitme" name="submit" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
-} else {
-    ?> disabled <?php 
-}
+    } else {
+        ?> disabled <?php 
+    }
     ?>
                         
                 </p>
