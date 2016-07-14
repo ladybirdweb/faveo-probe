@@ -38,7 +38,7 @@ if (isset($_SESSION['check']) == 1) {
             <h2>Probe</h2>
             <p>
                 <strong>Probe Version:</strong> 1.0
-                <br><strong>Testing For:</strong> Faveo HELPDESK 1.0.6 and Newer</p>
+                <br><strong>Testing For:</strong> Faveo HELPDESK 1.0.7 and Newer</p>
 
 
 
@@ -65,7 +65,7 @@ if (isset($_SESSION['check']) == 1) {
         public $message;
         public $status;
 
-        public function TestResult($message, $status = STATUS_OK)
+        public function __construct($message, $status = STATUS_OK)
         {
             $this->message = $message;
             $this->status = $status;
@@ -174,6 +174,7 @@ if (isset($_SESSION['check']) == 1) {
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
+      'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.'
     ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {

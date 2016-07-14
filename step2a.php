@@ -59,7 +59,7 @@ if ($var) {
         public $message;
         public $status;
 
-        public function testResult($message, $status = STATUS_OK)
+        public function __construct($message, $status = STATUS_OK)
         {
             $this->message = $message;
             $this->status = $status;
