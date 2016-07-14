@@ -147,7 +147,7 @@ if (isset($_SESSION['check']) == 1) {
     {
         $ok = true;
 
-        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl'];
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl', 'fileinfo'];
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
@@ -174,7 +174,7 @@ if (isset($_SESSION['check']) == 1) {
       //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
       // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
       // SVN extension ommited, to avoid confusion
-      'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.',
+      // 'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.',
     ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {
