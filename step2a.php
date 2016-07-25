@@ -196,8 +196,7 @@ foreach ($results as $result) {
 } else {
     ?>disabled<?php
 
-}
-        ?>>
+} ?>>
                         
                         <a href="step2.php?return=1" class="button button-large button-next" style="float: left">Previous</a>
                         
