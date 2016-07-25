@@ -147,7 +147,7 @@ if (isset($_SESSION['check']) == 1) {
     {
         $ok = true;
 
-        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl', 'fileinfo'];
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl', 'fileinfo', 'zip'];
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
