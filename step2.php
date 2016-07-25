@@ -63,8 +63,7 @@ if (!($var || $redirect)) {
               </div>
                 <?php
 
-    }
-    ?>
+    } ?>
               
 
         <form action="step2a.php" method="post">

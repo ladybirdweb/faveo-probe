@@ -308,8 +308,7 @@ if (isset($_SESSION['check']) == 1) {
         <p id="fail">This system does not meet Faveo system requirements</p>
         </div>
      <?php 
-  }
-    ?>
+  } ?>
             
       
             
@@ -319,10 +318,9 @@ if (isset($_SESSION['check']) == 1) {
                     <a href="#" class="button button-large button-next" style="float: left">Previous</a>
                    
                         <input type="submit" id="submitme" name="submit" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok) {
-    } else {
-        ?> disabled <?php 
-    }
-    ?>
+  } else {
+      ?> disabled <?php 
+  } ?>
                         
                 </p>
             </div>
