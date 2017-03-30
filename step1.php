@@ -37,8 +37,8 @@ if (isset($_SESSION['check']) == 1) {
 			</h1>
 						<h2>Probe</h2>
 						<p>
-								<strong>Probe Version:</strong> 1.0
-								<br><strong>Testing For:</strong> Faveo HELPDESK 1.0.7 and Newer</p>
+								<strong>Probe Version:</strong> 1.2
+								<br><strong>Testing For:</strong> Faveo HELPDESK 1.9.0 and Newer</p>
 
 
 
@@ -82,8 +82,8 @@ if (isset($_SESSION['check']) == 1) {
      */
     function validate_php(&$results)
     {
-        if (version_compare(PHP_VERSION, '5.5') == -1) {
-            $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.5.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+        if (version_compare(PHP_VERSION, '5.6') == -1) {
+            $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.6.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
             return false;
         } else {
@@ -92,6 +92,24 @@ if (isset($_SESSION['check']) == 1) {
             return true;
         } // if
     } // validate_php
+
+    /**
+     * Validate maximum execution time.
+     *
+     * @param array $results
+     */
+    function checkMaxExecutiontime(&$results)
+    {
+        $ok = true;
+        if ((int) ini_get('max_execution_time') >= 120) {
+            $results[] = new TestResult('Maximum execution time is as per requirement.', STATUS_OK);
+        } else {
+            $results[] = new TestResult('Maximum execution time is too low. Recommneded execution time is 120 seconds ', STATUS_WARNING);
+        }
+
+        return $ok;
+    }
+
     /**
      * Validate memory limit.
      *
@@ -312,6 +330,7 @@ if (isset($_SESSION['check']) == 1) {
     $extensions_ok = validate_extensions($results);
     $module_ok = validate_apache_module($results);
     $required_functions = checkDisabledFunctions($results);
+    $check_execution_time = checkMaxExecutiontime($results);
     // $compatibility_mode_ok = validate_zend_compatibility_mode($results);
 
     foreach ($results as $result) {
@@ -321,7 +340,7 @@ if (isset($_SESSION['check']) == 1) {
 						<!-- -->
 						</p>
 						
-						<?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok && $required_functions) {
+						<?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok && $required_functions && $check_execution_time) {
         ?>
 			<div class="woocommerce-message woocommerce-tracker" >
 				<p id="pass">OK, this system can run Faveo</p>
