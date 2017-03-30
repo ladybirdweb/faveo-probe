@@ -1,0 +1,11 @@
+Faveo Probe : Run Prerequisite check on your server to test if FAVEO HELPDESK can be run on server or not.
+
+===========================================================
+		Version 1.1.0                                     |
+===========================================================
+Change log
+
+	v1.1.0 runs environment test for Faveo Helpdesk v1.9.0 or newer
+	Checking maximimum execution time of server for required
+
+Note: If you are installing Faveo helpdesk's older version you may download older version of Faveo Probe to run environment test on your server. 
