@@ -77,15 +77,8 @@ if (!($var || $redirect)) {
 					<td>
 						<div class="side-by-side clearfix moveleftthre">
 							<div>
-								<select id="database-type" name="database-type" data-placeholder="Choose a SQL format..." class="chosen-select" style="width:290px;" tabindex="2" required>
-									<option name="database-type" value=""></option>
-
-
-									<option name="database-type"  value="MySQL">MySQL</option>
-
-									<!-- <option value="mm/dd/yyyy">PgSQL</option> -->
-									<!-- <option value="SQLSRV">SQLSRV</option> -->
-									
+								<select id="database-type select" name="database-type" data-placeholder="Choose a SQL format..." class="chosen-select" style="width:290px;" tabindex="2" required>
+									<option name="database-type"  value="MySQL">MySQL</option>									
 								</select>
 							</div>
 						</div>
