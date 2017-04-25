@@ -82,7 +82,7 @@ if (isset($_SESSION['check']) == 1) {
      */
     function validate_php(&$results)
     {
-        if (version_compare(PHP_VERSION, '5.6') == -1) {
+        if (version_compare(PHP_VERSION, '5.6.4') == -1) {
             $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.6.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
             return false;
@@ -165,7 +165,7 @@ if (isset($_SESSION['check']) == 1) {
         {
             $ok = true;
 
-            $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl', 'fileinfo', 'zip'];
+            $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mbstring', 'openssl', 'fileinfo', 'zip', 'xml'];
 
             foreach ($required_extensions as $required_extension) {
                 if (extension_loaded($required_extension)) {
@@ -189,6 +189,8 @@ if (isset($_SESSION['check']) == 1) {
         $recommended_extensions = [
             'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
             'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
+
+            'mcrypt' => 'Optional'
             //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
             // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
             // SVN extension ommited, to avoid confusion
