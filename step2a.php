@@ -46,39 +46,37 @@ if ($var) {
         $database_portno = $_POST['port-no'];
         $database_username = $_POST['user-name'];
         $database_password = $_POST['password'];
-//	Unit Testing
-//	echo "db" . $database_type."<br/>";
-//	echo $database_name."<br/>";
-//	echo $database_host."<br/>";
-//	echo $database_portno."<br/>";
-//	echo $database_username."<br/>";
-//	echo $database_password."<br/>";
+        //	Unit Testing
+        //	echo "db" . $database_type."<br/>";
+        //	echo $database_name."<br/>";
+        //	echo $database_host."<br/>";
+        //	echo $database_portno."<br/>";
+        //	echo $database_username."<br/>";
+        //	echo $database_password."<br/>";
 
-    class TestResult
-    {
-        public $message;
-        public $status;
-
-        public function __construct($message, $status = STATUS_OK)
+        class TestResult
         {
-            $this->message = $message;
-            $this->status = $status;
-        }
-    } // TestResult
-    function check_have_inno($link)
-    {
-        // if($result = mysqli_query('SHOW ENGINES', $link)) {
-        if ($result = $link('SHOW ENGINES')) {
-            while ($engine = mysqli_fetch_assoc($result)) {
-                if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
-                    return true;
-                } // if
-            } // while
-        } // if
-        return true;
-    } // check_have_inno
+            public $message;
+            public $status;
 
-    ?>
+            public function __construct($message, $status = STATUS_OK)
+            {
+                $this->message = $message;
+                $this->status = $status;
+            }
+        } // TestResult
+        function check_have_inno($link)
+        {
+            // if($result = mysqli_query('SHOW ENGINES', $link)) {
+            if ($result = $link('SHOW ENGINES')) {
+                while ($engine = mysqli_fetch_assoc($result)) {
+                    if (strtolower($engine['Engine']) == 'innodb' && in_array(strtolower($engine['Support']), ['yes', 'default'])) {
+                        return true;
+                    } // if
+                } // while
+            } // if
+        return true;
+        } // check_have_inno ?>
 		<h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank"><img src="images/logo.png" alt="faveo"></a></h1>
 		
         <ol class="wc-setup-steps">
@@ -105,33 +103,33 @@ if ($var) {
   $mysql_ok = true;
         $results = [];
 
-  //if($connection = mysql_connect($database_host, $database_username, $database_password)) {
+        //if($connection = mysql_connect($database_host, $database_username, $database_password)) {
 //    $results[] = new TestResult('Connected to database as ' . $database_username . '@' . $database_host, STATUS_OK);
 
-if ($connection = mysqli_connect($database_host, $database_username, $database_password)) {
-    $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
+        if ($connection = mysqli_connect($database_host, $database_username, $database_password)) {
+            $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
 
-    //if(mysql_select_db($database_name, $connection)) {
+            //if(mysql_select_db($database_name, $connection)) {
 //      $results[] = new TestResult('Database "' . $database_username . '" selected', STATUS_OK);
-    $sql = "SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = '$database_name'";
-    $res = mysqli_query($connection, $sql);
-    $value = mysqli_fetch_assoc($res);
-    foreach ($value as $val) {
-        if ($val == 0) {
-            $mysqli_version = $connection->server_version;
-            $results[] = new TestResult("Database '$database_name' looks fine.", STATUS_OK);
-            $mysql_ok = true;
-            if ($connection->select_db($database_name)) {
-                //      $results[] = new TestResult('Database "' . $database_username . '" selected', STATUS_OK);
-      //$mysql_version = mysql_get_server_info($connection);
-        $mysqli_version = $connection->server_version;
-                $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
-
-                if (version_compare($mysqli_version, '5.0') >= 0) {
-                    $results[] = new TestResult('MySQL version is '.$mysqli_version, STATUS_OK);
+            $sql = "SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = '$database_name'";
+            $res = mysqli_query($connection, $sql);
+            $value = mysqli_fetch_assoc($res);
+            foreach ($value as $val) {
+                if ($val == 0) {
+                    $mysqli_version = $connection->server_version;
+                    $results[] = new TestResult("Database '$database_name' looks fine.", STATUS_OK);
                     $mysql_ok = true;
+                    if ($connection->select_db($database_name)) {
+                        //      $results[] = new TestResult('Database "' . $database_username . '" selected', STATUS_OK);
+                        //$mysql_version = mysql_get_server_info($connection);
+                        $mysqli_version = $connection->server_version;
+                        $results[] = new TestResult('Connected to database as '.$database_username.'@'.$database_host, STATUS_OK);
 
-        //$have_inno = check_have_inno($connection);
+                        if (version_compare($mysqli_version, '5.0') >= 0) {
+                            $results[] = new TestResult('MySQL version is '.$mysqli_version, STATUS_OK);
+                            $mysql_ok = true;
+
+                        //$have_inno = check_have_inno($connection);
 
        // if($have_inno) {
 //          $results[] = new TestResult('InnoDB support is enabled');
@@ -139,33 +137,33 @@ if ($connection = mysqli_connect($database_host, $database_username, $database_p
 //          $results[] = new TestResult('No InnoDB support. Although activeCollab can use MyISAM storage engine InnoDB is HIGHLY recommended!', STATUS_WARNING);
 //        }
 //      } else {
+                        } else {
+                            $results[] = new TestResult('Your MySQL version is '.$mysqli_version.'. We recommend upgrading to at least MySQL5!', STATUS_ERROR);
+                            $mysql_ok = false;
+                        }
+                        // if
+                    } else {
+                        $results[] = new TestResult('Failed to select database. MySQL said: '.mysqli_error($connection), STATUS_ERROR);
+                        $mysql_ok = false;
+                    } // if
                 } else {
-                    $results[] = new TestResult('Your MySQL version is '.$mysqli_version.'. We recommend upgrading to at least MySQL5!', STATUS_ERROR);
+                    $results[] = new TestResult('Faveo installation needs an empty database.', STATUS_ERROR);
                     $mysql_ok = false;
                 }
-         // if
-            } else {
-                $results[] = new TestResult('Failed to select database. MySQL said: '.mysqli_error($connection), STATUS_ERROR);
-                $mysql_ok = false;
-            } // if
+                // code...
+            }
         } else {
-            $results[] = new TestResult('Faveo installation needs an empty database.', STATUS_ERROR);
+            $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_connect_error($connection), STATUS_ERROR);
             $mysql_ok = false;
-        }
-        // code...
-    }
-} else {
-    $results[] = new TestResult('Failed to connect to database. MySQL said: '.mysqli_connect_error($connection), STATUS_ERROR);
-    $mysql_ok = false;
-} // if
+        } // if
 
-  // ---------------------------------------------------
-  //  Validators
-  // ---------------------------------------------------
+        // ---------------------------------------------------
+        //  Validators
+        // ---------------------------------------------------
 
-foreach ($results as $result) {
-    echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
-} // foreach
+        foreach ($results as $result) {
+            echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
+        } // foreach
 ?><br/>
       
 
@@ -179,24 +177,21 @@ foreach ($results as $result) {
 				
 			</div>
 <?php
-
 } else {
-    ?>
+        ?>
  <div class="woocommerce-message woocommerce-tracker " >
 				<p id="fail">Database connection unsuccessful. This system does not meet Faveo system requirements</p>
 				</div>
 <?php
-
-} // if?>
+    } // if?>
  <form action="step3.php" method="post">
 				<div style="border-bottom: 1px solid #eee;">
                     <p class="wc-setup-actions step" >
                    
                         <input type="submit" name="submit" id="submitme" class="button-primary button button-large button-next" value="Continue" <?php if ($mysql_ok !== null && $mysql_ok) {
-} else {
-    ?>disabled<?php
-
-} ?>>
+    } else {
+        ?>disabled<?php
+    } ?>>
                         
                         <a href="step2.php?return=1" class="button button-large button-next" style="float: left">Previous</a>
                         
@@ -220,7 +215,6 @@ foreach ($results as $result) {
 
 </html>
 <?php
-
     }
 } else {
     header('Location: step2.php?return=1&error_message=Please fill all the required fields.');

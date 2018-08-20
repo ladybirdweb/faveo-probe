@@ -54,11 +54,10 @@ if (version_compare(PHP_VERSION, '5.4') == -1) {
 </html>
 
 <?php
-
 } else {
-    // Start the session
-    session_start();
-    $_SESSION['check'] = 1;
-    header('location: step1.php');
-}
+        // Start the session
+        session_start();
+        $_SESSION['check'] = 1;
+        header('location: step1.php');
+    }
 ?>
