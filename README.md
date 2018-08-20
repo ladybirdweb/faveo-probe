@@ -28,6 +28,6 @@ Before you run this test following components have to be installed on your serve
 
 Faveo probe is designed & developed by <a href="http://www.ladybirdweb.com" target="_blank">Ladybird Web Solution Pvt Ltd</a>, and launched in February 2016.
 
-That's it. If you have any questions or need our assistance, please get in touch: [http://www.faveohelpdesk.com/contact-us/](http://www.faveohelpdesk.com/contact-us/).
+That's it. If you have any questions or need our assistance, please get in touch: [https://www.faveohelpdesk.com/contact-us/](https://www.faveohelpdesk.com/contact-us/).
 
 You can also check <a href="https://github.com/ladybirdweb/faveo-testing-tools" target="_blank">Faveo Testing Tools</a>, these will help you troubleshoot issues with Faveo installation and usage.
