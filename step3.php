@@ -37,8 +37,8 @@ if (!$var) {
         <li class="active">Ready</li>
     </ol>
     <div class="wc-setup-content">
-        <a href="">
-        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-uhinU3OzXKj9zlFO7dFxHaChqyHPcWWg5nWgMqYt6N5b3knK" style="width: 86px; float: right;">
+        <a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text=I just set up a new HELPDESK with @faveohelpdesk www.faveohelpdesk.com">
+            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-uhinU3OzXKj9zlFO7dFxHaChqyHPcWWg5nWgMqYt6N5b3knK" style="width: 86px; float: right;">
         </a>
 
         <h1 style="text-align: center;">Your System is Ready!</h1>
@@ -80,6 +80,5 @@ if (!$var) {
 
 </html>
 <?php
-
 }
 ?>
