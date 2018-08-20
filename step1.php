@@ -135,46 +135,46 @@ if (isset($_SESSION['check']) == 1) {
          *
          *@param array $results
          */
-        function validate_apache_module(&$results)
-        {
-            $sapi_type = php_sapi_name();
-            if (substr($sapi_type, 0, 3) == 'cgi') {
-                $results[] = new TestResult('We are unable to detect your web server. Please make sure search engine friendly URL’s or pretty URLS’s are enabled on your web server. '/*Check the article here on how to enable it.*/, STATUS_WARNING);
+    function validate_apache_module(&$results)
+    {
+        $sapi_type = php_sapi_name();
+        if (substr($sapi_type, 0, 3) == 'cgi') {
+            $results[] = new TestResult('We are unable to detect your web server. Please make sure search engine friendly URL’s or pretty URLS’s are enabled on your web server. '/*Check the article here on how to enable it.*/, STATUS_WARNING);
+
+            return true;
+        } else {
+            $modules = apache_get_modules();
+            if (in_array('mod_rewrite', $modules) === true) {
+                $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
 
                 return true;
             } else {
-                $modules = apache_get_modules();
-                if (in_array('mod_rewrite', $modules) === true) {
-                    $results[] = new TestResult("Apache module 'mod_rewrite' found.", STATUS_OK);
+                $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
 
-                    return true;
-                } else {
-                    $results[] = new TestResult("Apache module 'mod_rewrite' is required.", STATUS_ERROR);
-
-                    return false;
-                }
+                return false;
             }
         }
+    }
 
-        /**
-         * Validate PHP extensions.
-         *
-         * @param array $results
-         */
-        function validate_extensions(&$results)
-        {
-            $ok = true;
+    /**
+     * Validate PHP extensions.
+     *
+     * @param array $results
+     */
+    function validate_extensions(&$results)
+    {
+        $ok = true;
 
-            $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mbstring', 'openssl', 'fileinfo', 'zip', 'xml'];
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mbstring', 'openssl', 'fileinfo', 'zip', 'xml'];
 
-            foreach ($required_extensions as $required_extension) {
-                if (extension_loaded($required_extension)) {
-                    $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
-                } else {
-                    $results[] = new TestResult("Extension '$required_extension' is required in order to run Faveo", STATUS_ERROR);
-                    $ok = false;
-                } // if
-            } // foreach
+        foreach ($required_extensions as $required_extension) {
+            if (extension_loaded($required_extension)) {
+                $results[] = new TestResult("Required extension '$required_extension' found", STATUS_OK);
+            } else {
+                $results[] = new TestResult("Extension '$required_extension' is required in order to run Faveo", STATUS_ERROR);
+                $ok = false;
+            } // if
+        } // foreach
         // Check for eAccelerator
         if (extension_loaded('eAccelerator') && ini_get('eaccelerator.enable')) {
             $results[] = new TestResult('eAccelerator opcode cache enabled. <span class="details">eAccelerator opcode cache causes Faveo to crash. <a href="https://eaccelerator.net/wiki/Settings">Disable it</a> for folder where Faveo is installed, or use APC instead: <a href="http://www.php.net/apc">http://www.php.net/apc</a>.</span>', STATUS_ERROR);
@@ -196,16 +196,16 @@ if (isset($_SESSION['check']) == 1) {
             // SVN extension ommited, to avoid confusion
             // 'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.',
         ];
-            foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
-                if (extension_loaded($recommended_extension)) {
-                    $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
-                } else {
-                    $results[] = new TestResult("Extension '$recommended_extension' was not found. <span class=\"details\">$recommended_extension_desc</span>", STATUS_WARNING);
-                } // if
-            } // foreach
+        foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
+            if (extension_loaded($recommended_extension)) {
+                $results[] = new TestResult("Recommended extension '$recommended_extension' found", STATUS_OK);
+            } else {
+                $results[] = new TestResult("Extension '$recommended_extension' was not found. <span class=\"details\">$recommended_extension_desc</span>", STATUS_WARNING);
+            } // if
+        } // foreach
 
         return $ok;
-        } // validate_extensions
+    } // validate_extensions
 
     /**
      * Validate Zend Engine compatibility mode.
@@ -337,8 +337,7 @@ if (isset($_SESSION['check']) == 1) {
 
     foreach ($results as $result) {
         echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
-    } // foreach
-    ?>
+    } // foreach ?>
 						<!-- -->
 						</p>
 						
@@ -348,13 +347,13 @@ if (isset($_SESSION['check']) == 1) {
 				<p id="pass">OK, this system can run Faveo</p>
 				
 			</div>
-<?php 
+<?php
     } else {
         ?>
 			<div class="woocommerce-message woocommerce-tracker " >
 				<p id="fail">This system does not meet Faveo system requirements</p>
 				</div>
-		 <?php 
+		 <?php
     } ?>
 						
 			
@@ -366,7 +365,7 @@ if (isset($_SESSION['check']) == 1) {
 									 
 												<input type="submit" id="submitme" name="submit" class="button-primary button button-large button-next" value="Continue"  <?php if ($php_ok && $memory_ok && $extensions_ok && $module_ok && $required_functions) {
     } else {
-        ?> disabled <?php 
+        ?> disabled <?php
     } ?>
 												
 								</p>
