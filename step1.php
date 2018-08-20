@@ -37,8 +37,8 @@ if (isset($_SESSION['check']) == 1) {
 			</h1>
 						<h2>Probe</h2>
 						<p>
-								<strong>Probe Version:</strong> 1.2
-								<br><strong>Testing For:</strong> Faveo HELPDESK 1.9.0 and Newer</p>
+								<strong>Probe Version:</strong> 2.0
+								<br><strong>Testing For:</strong> Faveo HELPDESK 1.10 and Newer</p>
 
 
 
