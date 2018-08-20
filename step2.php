@@ -62,7 +62,6 @@ if (!($var || $redirect)) {
                 <p id="fail"><?= $_GET['error_message']?></p>
               </div>
                 <?php
-
     } ?>
               
 
@@ -378,6 +377,5 @@ if (!($var || $redirect)) {
 
 </html>
 <?php
-
 }
 ?>
