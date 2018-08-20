@@ -76,7 +76,7 @@ if ($var) {
                 } // while
             } // if
         return true;
-        } // check_have_inno ?>
+        } // check_have_inno?>
 		<h1 id="wc-logo"><a href="http://www.faveohelpdesk.com" target="_blank"><img src="images/logo.png" alt="faveo"></a></h1>
 		
         <ol class="wc-setup-steps">
