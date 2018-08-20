@@ -82,8 +82,8 @@ if (isset($_SESSION['check']) == 1) {
      */
     function validate_php(&$results)
     {
-        if ((!version_compare(PHP_VERSION, '5.6', '>=')) || version_compare(PHP_VERSION, '7.0', '>=')) {
-            $results[] = new TestResult('Supported PHP versions minimum version 5.6.* and maximum version PHP 7.0.* . Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+        if (!version_compare(PHP_VERSION, '7.1.3', '>=')) {
+            $results[] = new TestResult('Faveo requires PHP version 7.1.3 or greater. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
             return false;
         } else {
@@ -165,7 +165,7 @@ if (isset($_SESSION['check']) == 1) {
     {
         $ok = true;
 
-        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mcrypt', 'mbstring', 'openssl', 'fileinfo', 'zip'];
+        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mbstring', 'openssl', 'fileinfo', 'zip'];
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
