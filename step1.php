@@ -130,11 +130,11 @@ if (isset($_SESSION['check']) == 1) {
         } // if
     } // validate_memory_limit
 
-        /**
-         * Validate Apache modules.
-         *
-         *@param array $results
-         */
+    /**
+     * Validate Apache modules.
+     *
+     *@param array $results
+     */
     function validate_apache_module(&$results)
     {
         $sapi_type = php_sapi_name();
@@ -335,7 +335,7 @@ if (isset($_SESSION['check']) == 1) {
 
     foreach ($results as $result) {
         echo '<br/><span class="'.$result->status.'">'.$result->status.'</span> &mdash; '.$result->message.'';
-    } // foreach ?>
+    } // foreach?>
 						<!-- -->
 						</p>
 						
