@@ -82,8 +82,8 @@ if (isset($_SESSION['check']) == 1) {
      */
     function validate_php(&$results)
     {
-        if (version_compare(PHP_VERSION, '5.6') == -1) {
-            $results[] = new TestResult('Minimum PHP version required in order to run Faveo is PHP 5.6.*. Your PHP version: '.PHP_VERSION, STATUS_ERROR);
+        if ((!version_compare(PHP_VERSION, "5.6", ">=")) || version_compare(PHP_VERSION, "7.0", ">=")) {
+            $results[] = new TestResult('Supported PHP versions minimum version 5.6.* and maximum version PHP 7.0.* . Your PHP version: '.PHP_VERSION, STATUS_ERROR);
 
             return false;
         } else {
