@@ -1,4 +1,5 @@
 <?php
+
 // Start the session
 session_start();
 $_SESSION['check'] = 1;
