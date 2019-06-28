@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 //$check = $_SESSION['check'];
 error_reporting(0);
@@ -56,7 +56,6 @@ if (isset($_SESSION['check']) == 1) {
 						
 						<!-- -->
 						<?php
-
 
     // -- No need to change anything below this line --------------------------------------
 
@@ -192,10 +191,10 @@ if (isset($_SESSION['check']) == 1) {
         } // if
 
         $recommended_extensions = [
-            'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
-            'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
-            'ldap' => 'Recommended for Faveo pro versions. If you plan to access AD using LDAP you must install the extension to enable LDAP support in PHP.',
-            'redis' => 'This extension provides client access to the Redis server. It is recommended as it allows system to use Redis server for caching data and use it as a queue driver for processing queued jobs.',
+            'gd'             => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
+            'iconv'          => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
+            'ldap'           => 'Recommended for Faveo pro versions. If you plan to access AD using LDAP you must install the extension to enable LDAP support in PHP.',
+            'redis'          => 'This extension provides client access to the Redis server. It is recommended as it allows system to use Redis server for caching data and use it as a queue driver for processing queued jobs.',
             'ionCube Loader' => 'Faveo pro versions have code files which are encoded using ionCube encoder for PHP. If you wish to run any pro version of Faveo on your server you must have ionCube loader installed on the server.',
         ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
