@@ -37,8 +37,13 @@ if (isset($_SESSION['check']) == 1) {
 			</h1>
 						<h2>Probe</h2>
 						<p>
-								<strong>Probe Version:</strong> 2.0
-								<br><strong>Testing For:</strong> Faveo HELPDESK 1.10 and Newer</p>
+								<strong>Probe Version:</strong> 2.1
+								<br><br><strong>Testing For:</strong>
+                                <ul>
+                                    <li>Faveo HELPDESK Community v1.10 or newer</li>
+                                    <li>Faveo HELPDESK Pro v2.0 or newer</li>
+                                </ul>
+                        </p>
 
 
 
@@ -138,7 +143,7 @@ if (isset($_SESSION['check']) == 1) {
     {
         $sapi_type = php_sapi_name();
         if (substr($sapi_type, 0, 3) == 'cgi') {
-            $results[] = new TestResult('We are unable to detect your web server. Please make sure search engine friendly URL’s or pretty URLS’s are enabled on your web server. '/*Check the article here on how to enable it.*/, STATUS_WARNING);
+            $results[] = new TestResult('We are unable to detect mod_rewrite your web server. Please make sure search engine friendly URL’s or pretty URLS’s are enabled on your web server. '/*Check the article here on how to enable it.*/, STATUS_WARNING);
 
             return true;
         } else {
@@ -164,7 +169,7 @@ if (isset($_SESSION['check']) == 1) {
     {
         $ok = true;
 
-        $required_extensions = ['mysqli', 'tokenizer', 'imap', 'curl', 'mbstring', 'openssl', 'fileinfo', 'zip'];
+        $required_extensions = ['curl', 'ctype', 'imap', 'mbstring', 'openssl', 'tokenizer', 'pdo_mysql', 'zip', 'pdo', 'mysqli', 'bcmath', 'XML', 'json', 'fileinfo'];
 
         foreach ($required_extensions as $required_extension) {
             if (extension_loaded($required_extension)) {
@@ -188,10 +193,9 @@ if (isset($_SESSION['check']) == 1) {
         $recommended_extensions = [
             'gd'    => 'GD is used for image manipulation. Without it, system is not able to create thumbnails for files or manage avatars, logos and project icons. Please refer to <a href="http://www.php.net/manual/en/image.installation.php">this</a> page for installation instructions',
             'iconv' => 'Iconv is used for character set conversion. Without it, system is a bit slower when converting different character set. Please refer to <a href="http://www.php.net/manual/en/iconv.installation.php">this</a> page for installation instructions',
-            //'imap' => 'IMAP is used to connect to POP3 and IMAP servers. Without it, Incoming Mail module will not work. Please refer to <a href="http://www.php.net/manual/en/imap.installation.php">this</a> page for installation instructions',
-            // 'zlib' => 'ZLIB is used to read and write gzip (.gz) compressed files',
-            // SVN extension ommited, to avoid confusion
-            // 'fileinfo' => '\'fileinfo\' extension is used to check the mime type of the files uploaded by users on the server. This helps server to validate the file extension before saving them on the server. Please enable it to upload Faveo\'s plugins and packages.',
+            'ldap' => 'Recommended for Faveo pro versions. If you plan to access AD using LDAP you must install the extension to enable LDAP support in PHP.',
+            'redis' => 'This extension provides client access to the Redis server. It is recommended as it allows system to use Redis server for caching data and use it as a queue driver for processing queued jobs.',
+            'ionCube Loader' => 'Faveo pro versions have code files which are encoded using ionCube encoder for PHP. If you wish to run any pro version of Faveo on your server you must have ionCube loader installed on the server.',
         ];
         foreach ($recommended_extensions as $recommended_extension => $recommended_extension_desc) {
             if (extension_loaded($recommended_extension)) {
@@ -377,7 +381,7 @@ if (isset($_SESSION['check']) == 1) {
 
 
 				</div>
-		<p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
+		<p style="text-align: center;">Copyright © 2015 - <?php echo date('Y'); ?> · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a>
 				</p>
 
 		</body>

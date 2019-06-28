@@ -74,7 +74,7 @@ if (!$var) {
         </div>
   </div>
 
-  <p style="text-align: center;">Copyright © 2015 - 2016 · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a></p>
+  <p style="text-align: center;">Copyright © 2015 - <?php echo date('Y'); ?> · Ladybird Web Solution Pvt Ltd. All Rights Reserved. Powered by <a href="http://www.faveohelpdesk.com" target="_blank">Faveo</a></p>
         
 </body>
 
