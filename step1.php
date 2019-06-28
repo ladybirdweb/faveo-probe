@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 //$check = $_SESSION['check'];
 error_reporting(0);
@@ -51,7 +51,6 @@ if (isset($_SESSION['check']) == 1) {
 						
 						<!-- -->
 						<?php
-
 
     // -- No need to change anything below this line --------------------------------------
 
